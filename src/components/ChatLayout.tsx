@@ -2,21 +2,74 @@
 
 import { useState } from "react";
 
+type Message = {
+  role: "user" | "assistant";
+  content: string;
+};
+
 export default function ChatLayout() {
   const [message, setMessage] = useState("");
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      role: "assistant",
+      content: "Welcome to the chat interface. Ask about gaming laptops, desktops, or hardware and I’ll route it to the model.",
+    },
+  ]);
+  const [statusMessage, setStatusMessage] = useState("Type your message below and press Enter to submit it to the model.");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const prepareChatInput = (value: string) => {
-    console.log("Prepared chat input:", value);
-    // Placeholder: integrate ChatGPT parsing later.
+  const handleSubmit = async (value: string) => {
+    const trimmed = value.trim();
+    if (!trimmed) return;
+
+    const userMessage: Message = { role: "user", content: trimmed };
+    setMessages((current) => [...current, userMessage]);
+    setMessage("");
+    setIsLoading(true);
+    setStatusMessage("Sending your prompt to the model...");
+
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ prompt: trimmed }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Unable to generate a response.");
+      }
+
+      setMessages((current) => [
+        ...current,
+        {
+          role: "assistant",
+          content: data.reply || "The model did not return a response.",
+        },
+      ]);
+      setStatusMessage("Response received from the model.");
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : "Unable to generate a response.";
+      setMessages((current) => [
+        ...current,
+        {
+          role: "assistant",
+          content: `Sorry, I could not generate a response. ${errorMessage}`,
+        },
+      ]);
+      setStatusMessage(errorMessage);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+  const handleKeyDown = async (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (event.key !== "Enter" || event.shiftKey) return;
     event.preventDefault();
-    const trimmed = message.trim();
-    if (!trimmed) return;
-    prepareChatInput(trimmed);
-    setMessage("");
+    await handleSubmit(message);
   };
 
   return (
@@ -43,10 +96,26 @@ export default function ChatLayout() {
             <div className="flex flex-col gap-4">
               <article className="rounded-[28px] border border-white/10 bg-[#111a30] p-6 shadow-[0_24px_60px_-30px_rgba(0,0,0,0.7)]">
                 <p className="text-sm text-slate-500">Welcome to the chat interface.</p>
-                <p className="mt-3 text-base leading-7 text-slate-100">
-                  Type your message below and press Enter to prepare it for ChatGPT parsing.
-                </p>
+                <p className="mt-3 text-base leading-7 text-slate-100">{statusMessage}</p>
               </article>
+
+              {messages.map((entry, index) => (
+                <div
+                  key={`${entry.role}-${index}`}
+                  className={`max-w-3xl rounded-[24px] border px-4 py-4 ${entry.role === "user" ? "ml-auto border-fuchsia-400/20 bg-fuchsia-500/10" : "border-white/10 bg-[#111a30]"}`}
+                >
+                  <p className="text-xs uppercase tracking-[0.25em] text-slate-400">
+                    {entry.role === "user" ? "You" : "Model"}
+                  </p>
+                  <p className="mt-2 text-sm leading-7 text-slate-100">{entry.content}</p>
+                </div>
+              ))}
+
+              {isLoading ? (
+                <div className="max-w-3xl rounded-[24px] border border-white/10 bg-[#111a30] px-4 py-4">
+                  <p className="text-sm text-slate-400">Waiting for the model response…</p>
+                </div>
+              ) : null}
             </div>
           </section>
 
