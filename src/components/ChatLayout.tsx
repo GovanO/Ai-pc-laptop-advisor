@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type Message = {
   role: "user" | "assistant";
@@ -12,11 +12,39 @@ export default function ChatLayout() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      content: "Welcome to the chat interface. Ask about gaming laptops, desktops, or hardware and I’ll route it to the model.",
+      content: "Welcome to the chat interface. Ask about gaming laptops, desktops, or hardware and I'll route it to the model.",
     },
   ]);
   const [statusMessage, setStatusMessage] = useState("Type your message below and press Enter to submit it to the model.");
   const [isLoading, setIsLoading] = useState(false);
+
+  // Fetch stored messages on component mount
+  useEffect(() => {
+    const fetchStoredMessages = async () => {
+      try {
+        const response = await fetch("/api/messages");
+        if (!response.ok) {
+          throw new Error("Failed to fetch stored messages");
+        }
+        const storedMessages: Message[] = await response.json();
+        if (storedMessages.length > 0) {
+          // Prepend stored messages to the welcome message
+          setMessages([
+            {
+              role: "assistant",
+              content: "Welcome to the chat interface. Ask about gaming laptops, desktops, or hardware and I'll route it to the model.",
+            },
+            ...storedMessages,
+          ]);
+        }
+      } catch (error) {
+        console.error("Error fetching stored messages:", error);
+        // If fetching fails, keep the welcome message - don't break the chat
+      }
+    };
+
+    fetchStoredMessages();
+  }, []);
 
   const handleSubmit = async (value: string) => {
     const trimmed = value.trim();
@@ -105,7 +133,7 @@ export default function ChatLayout() {
                   className={`max-w-3xl rounded-[24px] border px-4 py-4 ${entry.role === "user" ? "ml-auto border-fuchsia-400/20 bg-fuchsia-500/10" : "border-white/10 bg-[#111a30]"}`}
                 >
                   <p className="text-xs uppercase tracking-[0.25em] text-slate-400">
-                    {entry.role === "user" ? "You" : "Model"}
+                    {entry.role === "user" ? "You" : "Assistant"}
                   </p>
                   <p className="mt-2 text-sm leading-7 text-slate-100">{entry.content}</p>
                 </div>
