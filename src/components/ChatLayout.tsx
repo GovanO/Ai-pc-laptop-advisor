@@ -107,15 +107,12 @@ export default function ChatLayout() {
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <p className="text-xs uppercase tracking-[0.35em] text-fuchsia-300/80">
-                AI Laptop Advisor
+                AI PC/Laptop Advisor
               </p>
               <h1 className="mt-2 text-3xl font-semibold tracking-tight text-slate-100">
-                Gaming-inspired chat layout
+                Chat layout for laptop and desktop advice
               </h1>
             </div>
-            <span className="inline-flex rounded-full border border-fuchsia-400/20 bg-[#121c35] px-4 py-2 text-sm text-slate-200">
-              Asus ROG palette
-            </span>
           </div>
         </header>
 
@@ -123,7 +120,7 @@ export default function ChatLayout() {
           <section className="flex-1 overflow-y-auto p-6">
             <div className="flex flex-col gap-4">
               <article className="rounded-[28px] border border-white/10 bg-[#111a30] p-6 shadow-[0_24px_60px_-30px_rgba(0,0,0,0.7)]">
-                <p className="text-sm text-slate-500">Welcome to the chat interface.</p>
+                <p className="text-sm text-slate-500">Welcome to PC/Laptop Advisor interface.</p>
                 <p className="mt-3 text-base leading-7 text-slate-100">{statusMessage}</p>
               </article>
 

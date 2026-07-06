@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AI Laptop Advisor",
-  description: "Gaming-inspired chat layout for laptop and desktop advice",
+  title: "AI PC/Laptop Advisor",
+  description: "Chat layout for laptop and desktop advice",
 };
 
 export default function RootLayout({
