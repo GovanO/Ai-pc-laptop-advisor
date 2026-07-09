@@ -1,28 +1,3 @@
 {
-  "messages": [
-    {
-      "role": "user",
-      "content": "Hi. I have 1000$ budget and I would like to get the best gamin PC option for me. What would you suggest at this moment?",
-      "timestamp": 1783327190897,
-      "id": 1
-    },
-    {
-      "role": "assistant",
-      "content": "Building or buying the best gaming PC for $1000 is achievable, and you can get excellent 1080p to 1440p performance, depending on component choices. Let me suggest a balanced build within your budget. This would be a **DIY custom gaming PC build**, as pre-built systems often come with compromises in terms of price-to-performance.\n\n---\n\n### **$1000 Gaming PC Build (DIY)**\n\n| **Component**          | **Model/Option**                                     | **Price (Approx)** |\n|-------------------------|------------------------------------------------------|---------------------|\n| **Processor (CPU)**     | AMD Ryzen 5 5600 OR Intel Core i5-12400F             | ~$150-$170          |\n| **Graphics Card (GPU)** | NVIDIA RTX 3060 12GB OR AMD RX 6700 XT               | ~$320-$380          |\n| **Motherboard**         | B550 (AMD) OR B660 (Intel)                          | ~$120-$150          |\n| **Memory (RAM)**        | 16GB (2 x 8GB) DDR4-3200/3600 MHz                   | ~$50-$70            |\n| **Storage**             | 1TB NVMe M.2 SSD (e.g., Crucial P3 or Kingston NV2) | ~$50-$60            |\n| **Power Supply (PSU)**  | 600W-650W 80+ Bronze (e.g., EVGA, Corsair, Seasonic)| ~$50-$70            |\n| **Case**                | Mid-Tower ATX (with good airflow, e.g., NZXT H510)  | ~$50-$90            |\n| **Cooler**              | Included with the CPU (Ryzen Wraith Spire/Intel)    | Free                |\n\n**Total (Approx.): $950-$990**\n---\n\n### **Explanation of Choices**\n1. **CPU:** AMD Ryzen 5 5600 and Intel Core i5-12400F are excellent mid-range processors with six cores and twelve threads. Both excel in gaming and multitasking.\n2. **GPU:** The NVIDIA RTX 3060 and AMD RX 6700 XT deliver great performance for 1080p ultra and even 1440p gaming.\n3. **Motherboard:** Ensure you select an **AM4 B550 (for Ryzen)** or **LGA1700 B660 (for Intel)** motherboard with the necessary features (e.g., Wi-Fi, PCIe 4.0, etc.).\n4. **RAM:** 16GB is the standard for gaming today. Opt for 3200MHz or higher for Ryzen builds for better performance.\n5. **Storage:** 1TB NVMe SSD provides plenty of space and fast loading times for modern games.\n6. **PSU:** Aim for a quality PSU (with an 80+ efficiency rating) to ensure stable power delivery, especially for a system with a discrete GPU.\n7. **Case:** Focus on good airflow for cooling and compatibility with your GPU and motherboard.\n\n---\n\n### **Pre-Built Option**\nIf building isn't an option, look for pre-built systems featuring comparable specs. However, ensure the **GPU and CPU are not bottlenecked**, and avoid systems with overly proprietary parts (which limit upgrades).\n\n---\n\n### **Optional Upgrades**\n- Up your budget slightly to consider an **RTX 3060 Ti or RX 6800 (for ~10-15% better performance).**\n- Add an aftermarket CPU cooler (like a Cooler Master Hyper 212) for better thermals.\n- Extra case fans for improved airflow.\n\nLet me know if you'd like specific model recommendations or have further questions on configurations!",
-      "timestamp": 1783327190898,
-      "id": 2
-    },
-    {
-      "role": "user",
-      "content": "Do you answer any other question other than laptop/pc related?",
-      "timestamp": 1783327215675,
-      "id": 3
-    },
-    {
-      "role": "assistant",
-      "content": "I'm sorry but I can only answer pc/laptop related questions.",
-      "timestamp": 1783327215676,
-      "id": 4
-    }
-  ]
+  "messages": []
 }

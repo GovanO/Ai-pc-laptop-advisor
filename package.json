@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@epam/ai-dial-typescript-sdk": "^0.1.0-dev.21",
+    "@uiw/react-markdown-preview": "^5.2.1",
     "dotenv": "^17.4.2",
     "json-server": "^0.17.4",
     "next": "16.2.6",

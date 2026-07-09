@@ -3,12 +3,7 @@ import { createSDK } from "@epam/ai-dial-typescript-sdk";
 
 dotenv.config();
 
-let sdkPromise: ReturnType<typeof createSDK> | null = null;
-
 export async function connectToChatGPTModel() {
-  if (sdkPromise) {
-    return sdkPromise;
-  }
 
   const dialApiKey = process.env.DIAL_API_KEY?.trim();
   if (!dialApiKey) {
@@ -25,15 +20,14 @@ export async function connectToChatGPTModel() {
     apiKey: dialApiKey,
   });
 
-  sdkPromise = sdk;
   return sdk;
 }
 
-const PC_LAPTOP_ONLY_INSTRUCTION = `You are a personal computer and laptop expert. Answer only questions about PC and laptop hardware, configurations, or buying advice. Do not provide recommendations or comparisons for phones, tablets, wearables, smartwatches, IoT devices, or any other non-PC hardware.
+const PC_LAPTOP_ONLY_INSTRUCTION = `You are a personal computer and laptop expert. Answer only questions about PC and laptop hardware, configurations, or buying advice. Do not provide recommendations or comparisons for phones, tablets, wearables, smartwatches, IoT devices, or any other non-PC or non-laptop hardware.
 
-If the user asks about an unsupported category, reply exactly: "I'm sorry but I can only answer pc/laptop related questions."
+Only stay focused on desktops, notebooks, gaming laptops, related PC/laptop topics, public prices and all the peripherals that those devices consist of: graphic cards, RAM, processors, .etc, basially anything that is related to pc/laptop and it's potential usage purpose.
 
-Stay focused on desktops, notebooks, gaming laptops, workstation rigs, ultrabooks, and related PC/laptop topics only.`;
+If the user asks about something not anyhow related to pc or laptops, reply exactly: "I'm sorry but I can only answer pc/laptop related questions."`;
 
 export async function generateChatResponse(prompt: string) {
   const sdk = await connectToChatGPTModel();

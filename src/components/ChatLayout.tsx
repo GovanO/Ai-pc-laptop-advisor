@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import MarkdownPreview from "@uiw/react-markdown-preview";
 
 type Message = {
   role: "user" | "assistant";
@@ -132,7 +133,11 @@ export default function ChatLayout() {
                   <p className="text-xs uppercase tracking-[0.25em] text-slate-400">
                     {entry.role === "user" ? "You" : "Assistant"}
                   </p>
-                  <p className="mt-2 text-sm leading-7 text-slate-100">{entry.content}</p>
+                  <MarkdownPreview 
+                    source={entry.content}
+                    className={'text-sm'}
+                    style={{ padding: '0.5rem', background: 'transparent' }} 
+                  />
                 </div>
               ))}
 
